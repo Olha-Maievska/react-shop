@@ -1,14 +1,11 @@
+import { useContext } from 'react'
+import { ShopContext } from '../context'
+
 const BasketItem = (props) => {
-  const {
-    mainId,
-    displayName,
-    price,
-    quantity,
-    deleteFromBasket = Function.prototype,
-    incQuantity = Function.prototype,
-    decQuantity = Function.prototype,
-  } = props
+  const { mainId, displayName, price, quantity } = props
   const { finalPrice } = price
+
+  const { removeFromBasket, incQuantity, decQuantity } = useContext(ShopContext)
 
   return (
     <li className="collection-item">
@@ -29,7 +26,7 @@ const BasketItem = (props) => {
       = {finalPrice * quantity} грн.
       <span
         className="secondary-content"
-        onClick={() => deleteFromBasket(mainId)}
+        onClick={() => removeFromBasket(mainId)}
       >
         <i className="material-icons basket-delete">close</i>
       </span>
